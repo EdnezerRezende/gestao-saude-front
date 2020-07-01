@@ -1,4 +1,7 @@
 <ion-toolbar class="text-center">
+  <ion-buttons slot="start" *ngIf="rota !== ''">
+    <ion-back-button defaultHref="rota">Voltar</ion-back-button>
+  </ion-buttons>
   <ion-title>
     {{title}}
   </ion-title>

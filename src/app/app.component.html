@@ -1,3 +1,87 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <!-- <ion-split-pane> -->
+    <ion-menu side="start" contentId="content1" id="cabecalho-menu" >
+      <ion-content>
+        <ion-item id="cabecalho-menu" class="cabecalho-menu">
+        </ion-item>
+
+        <ion-list sliding="false" id="aberturaMenu">
+          <ion-item
+            no-lines
+            id="aberturaMenu"
+            *ngFor="let pagina of tratarMenuTela | orderBy:'titulo'; let i=index"
+            text-wrap
+            [ngClass]="{active: isLevel1Shown('idx'+i)}"
+            (click)="toggleLevel1('idx'+i)"
+            style="justify-content: space-around;"
+          >
+            <h2>
+              <ion-icon [name]="pagina.icone" item-left></ion-icon>
+              {{ pagina.titulo }}
+              <ion-icon
+                style="
+                  justify-content: flex-end;
+                  display: flex;
+                  margin-top: -28px;
+                "
+                color="success"
+                item-right
+                [name]="isLevel1Shown('idx'+i) ? 'arrow-dropdown' : 'arrow-dropright'"
+              ></ion-icon>
+            </h2>
+            <ion-list
+              hideWhen="ios"
+              style="margin-bottom: -26px;"
+              menuClose
+              *ngIf="isLevel1Shown('idx'+i)"
+            >
+              <ion-item
+                no-lines
+                menuClose
+                *ngFor="let sub of pagina.subTitulo"
+                text-wrap
+                (click)="irPagina(sub.componente)"
+              >
+                <h3 style="margin-top: -12px;">
+                  <ion-icon
+                    color="sucess"
+                    [name]="sub.iconeSub"
+                    menuClose
+                    item-left
+                  ></ion-icon>
+                  {{sub.submenu}}
+                </h3>
+              </ion-item>
+            </ion-list>
+            <ion-list
+              showWhen="ios"
+              style="margin-bottom: -15px;"
+              menuClose
+              *ngIf="isLevel1Shown('idx'+i)"
+            >
+              <ion-item
+                no-lines
+                menuClose
+                *ngFor="let sub of pagina.subTitulo"
+                text-wrap
+                (click)="irPagina(sub.componente)"
+              >
+                <h3 style="margin-top: -10px;">
+                  <ion-icon
+                    color="sucess"
+                    [name]="sub.iconeSub"
+                    menuClose
+                    item-left
+                  ></ion-icon>
+                  {{sub.submenu}}
+                </h3>
+              </ion-item>
+            </ion-list>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    
+    <ion-router-outlet id="content1" main></ion-router-outlet>
+  <!-- </ion-split-pane> -->
 </ion-app>

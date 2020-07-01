@@ -10,6 +10,9 @@ export class GestaoTitleHeaderComponent implements OnInit {
   @Input()
   title = '';
 
+  @Input()
+  rota = '';
+
   constructor() { }
 
   ngOnInit() {}

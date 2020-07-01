@@ -4,14 +4,20 @@ import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GestaoTitleHeaderComponent } from 'src/app/components/customizacoes/customizacoes/gestao-title-header/gestao-title-header.component';
 
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import {EditorModule} from 'primeng/editor';
+import {ChartModule} from 'primeng/chart';
+
 @NgModule({
   exports: [
-    IonicModule,
     CommonModule,
     ReactiveFormsModule,
-    GestaoTitleHeaderComponent
-
-  ], 
+    IonicModule,
+    GestaoTitleHeaderComponent,
+    AutoCompleteModule,
+    EditorModule,
+    ChartModule
+  ],
   declarations: [
     GestaoTitleHeaderComponent
   ]

@@ -3,11 +3,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">DashBoard</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  Vai apresentar vários gráficos 
-
+  <div class="text-center">
+    <ion-label ><strong>Pacientes Sem Leito</strong></ion-label>
+    <p-chart type="pie" [data]="data"></p-chart>
+  </div>
 </ion-content>
