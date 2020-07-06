@@ -4,6 +4,7 @@ import { OrigemDto } from './origem.dto';
 import { ComorbidadeDto } from './comorbidade.dto';
 
 export class PacienteNewDto {
+    id: number;
     nome: string;
     sexo: SexoEnum;
     dataNascimento: any;

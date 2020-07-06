@@ -14,5 +14,6 @@ export class PacienteDto {
     dataAdmissaoHCMG: Date;
     dataAlta: Date;
     numeroSES: number;
+    textoAlta: string;
 }
 

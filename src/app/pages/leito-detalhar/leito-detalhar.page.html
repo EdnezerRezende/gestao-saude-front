@@ -1,9 +1,19 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>leito-detalhar</ion-title>
-  </ion-toolbar>
+  <app-gestao-title-header [rota]="'/tabs/tab1'" [title]="title"></app-gestao-title-header>
 </ion-header>
 
 <ion-content>
-
+  <ion-card *ngIf="leito !== null ">
+    <ion-card-header>
+      <ion-card-title class="text-center" text-wrap>
+        <strong>{{ leito.numeroLeito + ' - ' + leito.ala + ' - ' + leito.setor | uppercase}}</strong>
+      </ion-card-title> 
+    </ion-card-header>
+    <ion-list>
+      <div class="padding-left">
+        <h6 *ngIf="leito.emUso"> <strong>Em Uso desde : </strong>{{ leito.dataUtilizacaoInicial | date: 'dd/MM/yyyy hh:mm'}}</h6>
+        <h6 *ngIf="!leito.emUso"> <strong>Vago desde: </strong>{{ leito.dataUtilizacaoFinal | date: 'dd/MM/yyyy hh:mm'}}</h6>
+      </div>
+    </ion-list>
+  </ion-card>
 </ion-content>

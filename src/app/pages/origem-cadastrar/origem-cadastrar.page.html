@@ -1,9 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>origem-cadastrar</ion-title>
-  </ion-toolbar>
+  <app-gestao-title-header [rota]="'/tabs/tab1'" [title]="title"></app-gestao-title-header>
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="formulario" >
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nome da Origem <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="text" inputmode="text" name="nomeOrigem" formControlName="nomeOrigem" ></ion-input>
+      </ion-item>
+
+    </ion-list>
+  </form>
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+    <ion-fab-button (click)="salvar()" [disabled]="formulario.invalid">
+      <ion-icon name="send"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-button expand="full" color="secondary" (click)="limparFormulario()" 
+    *ngIf="!temId"
+  >
+    LIMPAR
+  </ion-button>
 
 </ion-content>

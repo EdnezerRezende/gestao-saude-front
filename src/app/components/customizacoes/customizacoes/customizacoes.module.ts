@@ -1,12 +1,25 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { GestaoTitleHeaderComponent } from './gestao-title-header/gestao-title-header.component';
-import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { AppSearchbarComponent } from './app-searchbar/app-searchbar.component';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { PacientesListagemComponent } from './pacientes-listagem/pacientes-listagem.component';
 
 @NgModule({
-  declarations: [GestaoTitleHeaderComponent],
+  declarations: [
+    GestaoTitleHeaderComponent,
+    AppSearchbarComponent,
+    PacientesListagemComponent],
   imports: [
-    SharedModule
+    CommonModule,
+    ReactiveFormsModule,
+    IonicModule,
+  ],
+  exports: [
+    GestaoTitleHeaderComponent,
+    AppSearchbarComponent,
+    PacientesListagemComponent
   ]
 })
 export class CustomizacoesModule { }

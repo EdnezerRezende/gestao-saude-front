@@ -1,5 +1,6 @@
 export class LocalOrigemDto {
-    nomeOrigem:string;
-    isDeletado:boolean;
+    id: number;
+    nomeOrigem: string;
+    isDeletado: boolean;
 }
 

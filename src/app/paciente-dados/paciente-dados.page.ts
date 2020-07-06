@@ -21,6 +21,7 @@ export class PacienteDadosPage implements OnInit {
   podeSalvar = false;
 
   leitoPaciente = new LeitoPacienteDto();
+  ehAlta = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,11 +33,16 @@ export class PacienteDadosPage implements OnInit {
 
   ngOnInit() {
     const pacienteId = this.route.snapshot.paramMap.get('id');
-
+    this.ehAlta = (this.route.snapshot.paramMap.get('valor') === 'true');
+    if (this.ehAlta){
+      this.title = 'Detalhe da Liberação';
+    }else{
+      this.title = 'Associação de Leito';
+    }
     this.pacienteService.buscarPacientePorId(Number(pacienteId)).subscribe(resposta => {
       this.paciente = resposta;
-      this.leitoService.buscaTodosLeitosDisponíveisPorSexo(this.paciente.sexo).subscribe(resposta => {
-        this.leitos = resposta;
+      this.leitoService.buscaTodosLeitosDisponíveisPorSexo(this.paciente.sexo).subscribe(respostaLeito => {
+        this.leitos = respostaLeito;
       }, erro => {
         console.log(erro);
       });

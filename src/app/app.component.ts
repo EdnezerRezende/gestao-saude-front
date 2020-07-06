@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class AppComponent {
 
   showLevel1 = null;
+  paginas: any;
 
   constructor(
     private platform: Platform,
@@ -20,6 +21,7 @@ export class AppComponent {
     public nav: NavController,
     public menuCtrl: MenuController
   ) {
+    this.tratarMenuTela();
     this.initializeApp();
   }
 
@@ -30,39 +32,71 @@ export class AppComponent {
     });
   }
 
-  tratarMenuTela(): any[] {
-    return [
+  tratarMenuTela() {
+    this.paginas = [
       {
-        titulo: 'Leitos',
+        titulo: 'Leito',
         subTitulo: [
           {
             submenu: 'Cadastrar',
-            componente: 'LeitoCadastrarPage',
-            iconeSub: 'md-paper',
+            componente: '/leito-cadastrar',
+            iconeSub: 'newspaper-outline',
           },
           {
             submenu: 'Listar',
-            componente: 'LeitoListarPage',
-            iconeSub: 'md-list-box',
+            componente: '/leito-listar',
+            iconeSub: 'list-circle-outline',
           },
         ],
-        icone: 'md-filing',
+        icone: 'bed-outline',
       },
       {
-        titulo: 'Origens',
+        titulo: 'Origem',
         subTitulo: [
           {
             submenu: 'Cadastrar',
-            componente: 'OrigemCadastrarPage',
-            iconeSub: 'md-paper',
+            componente: '/origem-cadastrar',
+            iconeSub: 'newspaper-outline',
           },
           {
             submenu: 'Listar',
-            componente: 'OrigemListarPage',
-            iconeSub: 'md-list-box',
+            componente: '/origem-listar',
+            iconeSub: 'list-circle-outline',
           },
         ],
-        icone: 'md-filing',
+        icone: 'wap-horizontal-outline',
+      },
+      {
+        titulo: 'Paciente',
+        subTitulo: [
+          {
+            submenu: 'Pacientes Com Leito ',
+            componente: '/pacientes-com-leito',
+            iconeSub: 'list-circle-outline',
+          },
+          {
+            submenu: 'Pacientes liberados ',
+            componente: '/pacientes-liberados',
+            iconeSub: 'list-circle-outline',
+          },
+        ],
+        icone: 'wap-horizontal-outline',
+      },
+      {
+        titulo: 'Relatórios',
+        subTitulo: [
+          {
+            submenu: 'Pacientes Com Leito',
+            componente: '/paciente-listar',
+            iconeSub: 'list-circle-outline',
+          },
+          {
+            submenu: 'Leitos x Ocupação',
+            componente: '/leitos-ocupacao',
+            iconeSub: 'list-circle-outline',
+          },
+        ],
+        icone: 'wap-horizontal-outline',
       },
     ];
   }
@@ -81,10 +115,9 @@ export class AppComponent {
 
   irPagina(componente) {
     this.menuCtrl.close();
-    this.toggleLevel1(undefined);
+    this.toggleLevel1(null);
     this.nav.navigateRoot('');
     this.nav.navigateForward(componente);
-
   }
 
 }

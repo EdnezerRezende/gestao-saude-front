@@ -17,6 +17,17 @@ export class LeitoService {
       .get<LeitoDto[]>(`${API_CONFIG.baseUrl}/api/leitos`);
   }
 
+  buscaLeitosPorOcupacao(): Observable<LeitoDto[]> {
+    return this.http
+      .get<LeitoDto[]>(`${API_CONFIG.baseUrl}/api/leitos/leitos-ocupacao`);
+  }
+
+
+  buscaTodosLeitoPorId(leitoId: number): Observable<LeitoDto> {
+    return this.http
+      .get<LeitoDto>(`${API_CONFIG.baseUrl}/api/leitos/${leitoId}`);
+  }
+
   buscaTodosLeitosDisponíveis(): Observable<LeitoDto[]> {
     return this.http
       .get<LeitoDto[]>(`${API_CONFIG.baseUrl}/api/leitos/disponiveis`);

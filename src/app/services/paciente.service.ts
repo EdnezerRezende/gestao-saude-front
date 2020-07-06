@@ -21,6 +21,12 @@ export class PacienteService {
       .get<PacienteDto[]>(`${API_CONFIG.baseUrl}/api/pacientes`);
   }
 
+  buscaTodosLiberados(): Observable<PacienteDto[]> {
+    return this.http
+      .get<PacienteDto[]>(`${API_CONFIG.baseUrl}/api/pacientes/liberados`);
+  }
+
+
   dashBoardPacientesPorSexo(): Observable<DashBoardPacientesSexoDTO> {
     return this.http
       .get<DashBoardPacientesSexoDTO>(`${API_CONFIG.baseUrl}/api/pacientes/dashBoard/por-sexo`);
@@ -50,5 +56,10 @@ export class PacienteService {
   concederAlta(altaDto: AltaPacienteDTO) {
     return this.http
       .put(`${API_CONFIG.baseUrl}/api/pacientes/alta/${altaDto.idPaciente}`, altaDto);
+  }
+
+  deletarPaciente(idPaciente: number){
+    return this.http
+      .delete(`${API_CONFIG.baseUrl}/api/pacientes/${idPaciente}`);
   }
 }

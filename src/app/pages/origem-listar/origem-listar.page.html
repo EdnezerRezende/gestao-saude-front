@@ -1,9 +1,22 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>origem-listar</ion-title>
-  </ion-toolbar>
+  <app-gestao-title-header [rota]="'/tabs/tab1'" [title]="title"></app-gestao-title-header>
 </ion-header>
 
 <ion-content>
+  <app-app-searchbar (retornoPesquisa)="getItems($event)"></app-app-searchbar>
 
+  <br /><br />  
+  <ion-list *ngFor="let localOrigem of localOrigemSearch" >
+    <ion-item-sliding #slidingCase >
+      <ion-item detail=false (click)="detalhar(localOrigem,slidingCase)" >
+        <h2>
+          <strong><label>{{ localOrigem.nomeOrigem | uppercase}}</label></strong>
+        </h2>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="deletar(localOrigem,slidingCase)" color="danger">Deletar</ion-item-option>
+        <ion-item-option (click)="alterar(localOrigem,slidingCase)" color="primary">Alterar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

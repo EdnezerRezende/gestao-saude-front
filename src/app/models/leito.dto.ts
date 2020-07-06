@@ -1,3 +1,5 @@
+import { PacienteDto } from './paciente.dto';
+
 export class LeitoDto {
     id: number;
     numeroLeito: string;
@@ -6,5 +8,6 @@ export class LeitoDto {
     emUso: boolean;
     dataUtilizacaoInicial: Date;
     dataUtilizacaoFinal: Date;
+    paciente: PacienteDto;
 }
 

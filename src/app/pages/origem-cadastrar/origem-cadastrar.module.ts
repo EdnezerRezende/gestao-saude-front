@@ -1,18 +1,13 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
 
 import { OrigemCadastrarPageRoutingModule } from './origem-cadastrar-routing.module';
 
 import { OrigemCadastrarPage } from './origem-cadastrar.page';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
+    SharedModule,
     OrigemCadastrarPageRoutingModule
   ],
   declarations: [OrigemCadastrarPage]

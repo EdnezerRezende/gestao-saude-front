@@ -7,12 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { OrigemDetalharPageRoutingModule } from './origem-detalhar-routing.module';
 
 import { OrigemDetalharPage } from './origem-detalhar.page';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
+    SharedModule,
     OrigemDetalharPageRoutingModule
   ],
   declarations: [OrigemDetalharPage]

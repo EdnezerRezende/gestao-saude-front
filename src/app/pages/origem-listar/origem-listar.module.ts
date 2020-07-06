@@ -7,12 +7,11 @@ import { IonicModule } from '@ionic/angular';
 import { OrigemListarPageRoutingModule } from './origem-listar-routing.module';
 
 import { OrigemListarPage } from './origem-listar.page';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
+    SharedModule,
     OrigemListarPageRoutingModule
   ],
   declarations: [OrigemListarPage]

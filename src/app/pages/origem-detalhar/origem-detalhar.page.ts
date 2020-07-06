@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./origem-detalhar.page.scss'],
 })
 export class OrigemDetalharPage implements OnInit {
-
+  title = 'Detalhar Origem';
+  
   constructor() { }
 
   ngOnInit() {

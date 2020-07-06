@@ -33,7 +33,7 @@
         <ion-label position="stacked">Origem: <ion-text color="danger">*</ion-text></ion-label>
         <ion-select
           formControlName="origem"
-          [compareWith]="compareFn" >
+          [compareWith]="compareFnOrigem" >
           <ion-select-option *ngFor="let localOrigem of localOrigemDTO" [value]="localOrigem">{{localOrigem.nomeOrigem}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -47,7 +47,7 @@
         <ion-label position="stacked">Comorbidades: </ion-label>
         <ion-select
           formControlName="comorbidades"
-          [compareWith]="compareFn" 
+          [compareWith]="compareFnComorbidades" 
           multiple="true" 
           cancelText="Cancelar" 
           >

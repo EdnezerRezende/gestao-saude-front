@@ -33,6 +33,8 @@ export class Tab2Page implements OnInit {
   localOrigemDTO = Array<LocalOrigemDto>();
   doencas = Array<DoencaDto>();
 
+  isAlteracao = false;
+
   constructor(
     private fb: FormBuilder,
     private navCtrl: NavController,
@@ -46,17 +48,32 @@ export class Tab2Page implements OnInit {
   ngOnInit(){
     this.criarFormulario();
     this.obterSelects();
-
   }
 
+  ionViewWillEnter(){
+    const idPaciente = this.route.snapshot.paramMap.get('id');
+    if (idPaciente !== null){
+      this.pacienteService.buscarPacientePorId(Number(idPaciente)).subscribe(resposta => {
+        this.paciente = resposta;
+        console.log(this.paciente);
+        this.montarDTOAlteracao();
+        this.title = 'Alteração de Paciente';
+        this.isAlteracao = true;
+      }, erro => {
+        console.log('Deu ruim');
+      });
+    } else {
+      this.title = 'Cadastro de Pacientes';
+    }
+  }
   private obterSelects() {
     this.obterLocaisOrigens();
 
     this.obterDoencas();
   }
 
-  private obterDoencas() {
-    this.comorbidadeService.buscaTodas().subscribe(
+  async obterDoencas() {
+    await this.comorbidadeService.buscaTodas().subscribe(
       (resposta) => {
         this.doencas = resposta;
       },
@@ -66,8 +83,8 @@ export class Tab2Page implements OnInit {
     );
   }
 
-  private obterLocaisOrigens() {
-    this.localOrigemService.buscaTodos().subscribe(
+  async obterLocaisOrigens() {
+    await this.localOrigemService.buscaTodos().subscribe(
       (resposta) => {
         this.localOrigemDTO = resposta;
       },
@@ -89,9 +106,37 @@ export class Tab2Page implements OnInit {
     });
   }
 
+  montarDTOAlteracao(){
+    this.formulario.get('nome').setValue(this.paciente.nome);
+    this.formulario.get('sexo').setValue(this.paciente.sexo);
+    this.formulario.get('numeroSES').setValue(this.paciente.numeroSES);
+    this.formulario.get('dataNascimento').setValue(this.paciente.dataNascimento);
+    this.formulario.get('origem').setValue(this.paciente.origem.localOrigem);
+
+    const doencas = new Array<DoencaDto>();
+    this.paciente.comorbidades.forEach(comorbidade => {
+      const doenca = new DoencaDto();
+      doenca.id = comorbidade.doenca.id;
+      doenca.isDeletado = comorbidade.doenca.isDeletado;
+      doenca.nomeDoenca = comorbidade.doenca.nomeDoenca;
+      doencas.push(doenca);
+    });
+    this.formulario.get('comorbidades').setValue(doencas);
+    this.formulario.get('dataAdmissaoHCMG').setValue(this.paciente.dataAdmissaoHCMG);
+  }
   compareFn(e1: string, e2: string): boolean {
     return e1 && e2 ? e1 === e2 : e1 === e2;
   }
+
+  compareFnOrigem(e1: LocalOrigemDto, e2: LocalOrigemDto): boolean {
+    return e1.id && e2.id ? e1.id === e2.id : e1.id === e2.id;
+  }
+
+
+  compareFnComorbidades(e1: ComorbidadeDto, e2: ComorbidadeDto): boolean {
+    return e1.id && e2.id  ? e1.id  === e2.id  : e1.id === e2.id;
+  }
+
 
   limparFormulario(){
     this.formulario.reset();
@@ -113,6 +158,11 @@ export class Tab2Page implements OnInit {
       });
       toast.present();
       this.limparFormulario();
+      if (this.isAlteracao){
+        this.title = 'Cadastro de Pacientes';
+        this.isAlteracao = false;
+        this.navCtrl.navigateBack('/pacientes-com-leito');
+      }
     },
     async error => {
       const toast = await this.toastController.create({
@@ -130,13 +180,32 @@ export class Tab2Page implements OnInit {
 
   private montarDTO() {
     const paciente = new PacienteNewDto();
+    paciente.id = this.paciente.id;
     paciente.nome = this.formulario.controls.nome.value;
     paciente.sexo = this.formulario.controls.sexo.value;
-    paciente.numeroSES = this.formulario.controls.numeroSES.value;2
+    paciente.numeroSES = this.formulario.controls.numeroSES.value;
     paciente.dataNascimento = DataUtil.DateParaString(this.formulario.controls.dataNascimento.value, 'DD/MM/YYYY');
-    paciente.comorbidades = this.formulario.controls.comorbidades.value;
-    paciente.origem = this.formulario.controls.origem.value;
-    paciente.origem.dataAdmissaoOrigem = DataUtil.DateParaString(this.formulario.controls.dataAdmissaoHCMG.value, 'DD/MM/YYYY hh:mm');
+    paciente.comorbidades = new Array<ComorbidadeDto>();
+    this.formulario.controls.comorbidades.value.forEach(comorbidade => {
+      let doenca = new DoencaDto();
+      doenca = comorbidade;
+      const comorbidadeTemp = new ComorbidadeDto();
+      comorbidadeTemp.doenca = doenca;
+      comorbidadeTemp.id = comorbidade.id;
+      paciente.comorbidades.push(comorbidadeTemp);
+    });
+
+    const origemTemp = this.formulario.get('origem').value;
+
+    if ( !this.isAlteracao || this.paciente.origem.localOrigem.id !== origemTemp.id){
+      paciente.origem = new OrigemDto();
+      paciente.origem.localOrigem = this.formulario.controls.origem.value;
+      paciente.origem.dataAdmissaoOrigem = DataUtil.DateParaString(this.formulario.controls.dataAdmissaoHCMG.value, 'DD/MM/YYYY hh:mm');
+    } else {
+      paciente.origem = this.paciente.origem;
+      paciente.origem.dataAdmissaoOrigem = DataUtil.DateParaString(new Date(paciente.origem.dataAdmissaoOrigem), 'DD/MM/YYYY hh:mm');
+    }
+
     return paciente;
   }
 }
