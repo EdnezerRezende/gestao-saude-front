@@ -1,0 +1,20 @@
+<ion-header>
+  <app-gestao-title-header [rota]="'/tabs/tab1'" [title]="title"></app-gestao-title-header>
+</ion-header>
+
+<ion-content>
+  <app-app-searchbar (retornoPesquisa)="getItems($event)"></app-app-searchbar>
+  <ion-list *ngFor="let doenca of doencasSearch" >
+    <ion-item-sliding #slidingCase >
+      <ion-item detail=false (click)="detalhar(doenca,slidingCase)" >
+        <h2>
+          <strong><label>{{ doenca.nomeDoenca | uppercase}}</label></strong>
+        </h2>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="deletar(doenca,slidingCase)" color="danger">Deletar</ion-item-option>
+        <ion-item-option (click)="alterar(doenca,slidingCase)" color="primary">Alterar</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

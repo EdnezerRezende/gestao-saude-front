@@ -6,6 +6,10 @@ import { LeitoDto } from 'src/app/models/leito.dto';
 import { SexoEnum } from 'src/app/models/Enum/sexo.enum';
 import { AlaEnum } from 'src/app/models/Enum/ala.enum';
 import { SelectItem } from 'primeng/api';
+import { LeitoOcupacaoDto } from 'src/app/models/leito-ocupacao.dto';
+import * as jsPDF from 'jspdf';
+
+import { DataUtil } from 'src/app/util/date-util';
 
 @Component({
   selector: 'app-leitos-ocupacao',
@@ -16,9 +20,11 @@ export class LeitosOcupacaoPage implements OnInit {
 
   title = 'Relatório de Leitos X Ocupação';
 
-  leitos = new Array<LeitoDto>();
+  leitos = new Array<LeitoOcupacaoDto>();
 
   cols;
+
+  jsPDF: any;
 
   exportColumns: any[];
   selectedLeitos: LeitoDto[];
@@ -64,34 +70,22 @@ export class LeitosOcupacaoPage implements OnInit {
     this.exportColumns = this.cols.map(col => ({title: col.header, dataKey: col.field}));
   }
 
-  exportPdf() {
-    import('jspdf').then(jsPDF => {
-      import('jspdf-autotable').then(x => {
-          const doc = new jsPDF.default(0, 0);
-          doc.autoTable(this.exportColumns, this.leitos);
-          doc.save('primengTable.pdf');
-      });
-    });
+  exportPdf(dt) {
+    console.log(dt.filteredValue);
+    const valores = dt.filteredValue ? dt.filteredValue : this.leitos;
+    this.jsPDF = new jsPDF('l', 'pt');
+    this.jsPDF.autoTable(this.exportColumns, valores);
+    this.jsPDF.save(`Leitos_Ocupacao_` + DataUtil.DateParaString(new Date(), 'DD_MM_YYYY_HH:mm') + `.pdf`);
   }
 
-  exportExcel() {
-    import('xlsx').then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(this.leitos);
-        const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-        this.saveAsExcelFile(excelBuffer, 'primengTable');
+  quantidade(lista: LeitoOcupacaoDto[]){
+    let quantidade = 0;
+    lista.forEach(leito => {
+      if (leito.nome === undefined){
+        quantidade += 1;
+      }
     });
-  }
-
-  saveAsExcelFile(buffer: any, fileName: string): void {
-    import('file-saver').then(FileSaver => {
-        const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-        const EXCEL_EXTENSION = '.xlsx';
-        const data: Blob = new Blob([buffer], {
-            type: EXCEL_TYPE
-        });
-        FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-    });
+    return quantidade;
   }
 
 }

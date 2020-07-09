@@ -1,0 +1,13 @@
+<ion-header>
+  <app-gestao-title-header [rota]="'/tabs/tab1'" [title]="title"></app-gestao-title-header>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="doenca !== null ">
+    <ion-card-header>
+      <ion-card-title class="text-center" text-wrap>
+        <strong>{{ doenca.nomeDoenca | uppercase}}</strong>
+      </ion-card-title> 
+    </ion-card-header>
+  </ion-card>
+</ion-content>

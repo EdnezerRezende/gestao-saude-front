@@ -40,7 +40,7 @@ export class AppComponent {
           {
             submenu: 'Cadastrar',
             componente: '/leito-cadastrar',
-            iconeSub: 'newspaper-outline',
+            iconeSub: 'pencil-outline',
           },
           {
             submenu: 'Listar',
@@ -56,7 +56,7 @@ export class AppComponent {
           {
             submenu: 'Cadastrar',
             componente: '/origem-cadastrar',
-            iconeSub: 'newspaper-outline',
+            iconeSub: 'pencil-outline',
           },
           {
             submenu: 'Listar',
@@ -86,8 +86,8 @@ export class AppComponent {
         titulo: 'Relatórios',
         subTitulo: [
           {
-            submenu: 'Pacientes Com Leito',
-            componente: '/paciente-listar',
+            submenu: 'Leito Quantitativos',
+            componente: '/leitos-quantidades',
             iconeSub: 'list-circle-outline',
           },
           {
@@ -97,6 +97,22 @@ export class AppComponent {
           },
         ],
         icone: 'wap-horizontal-outline',
+      },
+      {
+        titulo: 'Doença',
+        subTitulo: [
+          {
+            submenu: 'Cadastrar',
+            componente: '/doenca-cadastrar',
+            iconeSub: 'pencil-outline',
+          },
+          {
+            submenu: 'Listar',
+            componente: '/doenca-listar',
+            iconeSub: 'list-circle-outline',
+          },
+        ],
+        icone: 'thermometer-outline',
       },
     ];
   }
@@ -115,6 +131,7 @@ export class AppComponent {
 
   irPagina(componente) {
     this.menuCtrl.close();
+    this.showLevel1 = null;
     this.toggleLevel1(null);
     this.nav.navigateRoot('');
     this.nav.navigateForward(componente);

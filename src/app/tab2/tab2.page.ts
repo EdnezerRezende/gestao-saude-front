@@ -200,10 +200,10 @@ export class Tab2Page implements OnInit {
     if ( !this.isAlteracao || this.paciente.origem.localOrigem.id !== origemTemp.id){
       paciente.origem = new OrigemDto();
       paciente.origem.localOrigem = this.formulario.controls.origem.value;
-      paciente.origem.dataAdmissaoOrigem = DataUtil.DateParaString(this.formulario.controls.dataAdmissaoHCMG.value, 'DD/MM/YYYY hh:mm');
+      paciente.origem.dataAdmissaoOrigem = DataUtil.DateParaString(this.formulario.controls.dataAdmissaoHCMG.value, 'DD/MM/YYYY HH:mm');
     } else {
       paciente.origem = this.paciente.origem;
-      paciente.origem.dataAdmissaoOrigem = DataUtil.DateParaString(new Date(paciente.origem.dataAdmissaoOrigem), 'DD/MM/YYYY hh:mm');
+      paciente.origem.dataAdmissaoOrigem = DataUtil.DateParaString(new Date(paciente.origem.dataAdmissaoOrigem), 'DD/MM/YYYY HH:mm');
     }
 
     return paciente;

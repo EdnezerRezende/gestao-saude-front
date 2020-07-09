@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { API_CONFIG } from '../config/api.config';
 import { LeitoDto } from '../models/leito.dto';
 import { LeitoNewDto } from '../models/leito-new.dto';
+import { LeitoOcupacaoDto } from '../models/leito-ocupacao.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,15 @@ export class LeitoService {
       .get<LeitoDto[]>(`${API_CONFIG.baseUrl}/api/leitos`);
   }
 
-  buscaLeitosPorOcupacao(): Observable<LeitoDto[]> {
+  buscaLeitosPorOcupacao(): Observable<LeitoOcupacaoDto[]> {
     return this.http
-      .get<LeitoDto[]>(`${API_CONFIG.baseUrl}/api/leitos/leitos-ocupacao`);
+      .get<LeitoOcupacaoDto[]>(`${API_CONFIG.baseUrl}/api/leitos/leitos-ocupacao`);
   }
 
+  buscaLeitosQuantitativo(): Observable<LeitoDto[]> {
+    return this.http
+      .get<LeitoDto[]>(`${API_CONFIG.baseUrl}/api/leitos/leitos-quantitativo`);
+  }
 
   buscaTodosLeitoPorId(leitoId: number): Observable<LeitoDto> {
     return this.http

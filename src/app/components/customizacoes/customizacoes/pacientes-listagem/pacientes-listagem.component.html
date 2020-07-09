@@ -2,7 +2,8 @@
   <ion-item-sliding #slidingCase >
     <ion-item detail=false (click)="detalhar(item,slidingCase)" >
       <h2>
-        <strong><label>{{ item.nome + ' - ' + item.numeroSES | uppercase}}</label></strong>
+        <strong><label>{{ item.nome | uppercase}}</label></strong>
+        <strong class="ajustaNumero"><label>{{ item.numeroSES }}</label></strong>
       </h2>
     </ion-item>
     <ion-item-options side="end">

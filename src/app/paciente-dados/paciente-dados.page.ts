@@ -22,6 +22,7 @@ export class PacienteDadosPage implements OnInit {
 
   leitoPaciente = new LeitoPacienteDto();
   ehAlta = false;
+  jaTinhaLeito = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +42,11 @@ export class PacienteDadosPage implements OnInit {
     }
     this.pacienteService.buscarPacientePorId(Number(pacienteId)).subscribe(resposta => {
       this.paciente = resposta;
+      if (this.paciente.leitos.length){
+        this.jaTinhaLeito = true;
+      }else{
+        this.jaTinhaLeito = false;
+      }
       this.leitoService.buscaTodosLeitosDisponíveisPorSexo(this.paciente.sexo).subscribe(respostaLeito => {
         this.leitos = respostaLeito;
       }, erro => {

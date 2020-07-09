@@ -28,7 +28,6 @@ export class LeitoListarPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.obterLista();
   }
 
   ionViewWillEnter(){

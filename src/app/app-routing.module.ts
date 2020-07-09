@@ -61,6 +61,30 @@ const routes: Routes = [
   {
     path: 'leitos-ocupacao',
     loadChildren: () => import('./pages/leitos-ocupacao/leitos-ocupacao.module').then( m => m.LeitosOcupacaoPageModule)
+  },
+  {
+    path: 'leitos-quantidades',
+    loadChildren: () => import('./pages/leitos-quantidades/leitos-quantidades.module').then( m => m.LeitosQuantidadesPageModule)
+  },
+  {
+    path: 'doenca-listar',
+    loadChildren: () => import('./pages/doenca-listar/doenca-listar.module').then( m => m.DoencaListarPageModule)
+  },
+  {
+    path: 'doenca-detalhar',
+    loadChildren: () => import('./pages/doenca-detalhar/doenca-detalhar.module').then( m => m.DoencaDetalharPageModule)
+  },
+  {
+    path: 'doenca-cadastrar',
+    loadChildren: () => import('./pages/doenca-cadastrar/doenca-cadastrar.module').then( m => m.DoencaCadastrarPageModule)
+  },
+  {
+    path: 'doenca-detalhar/doencaId/:id',
+    loadChildren: () => import('./pages/doenca-detalhar/doenca-detalhar.module').then( m => m.DoencaDetalharPageModule)
+  },
+  {
+    path: 'doenca-cadastrar/doencaId/:id',
+    loadChildren: () => import('./pages/doenca-cadastrar/doenca-cadastrar.module').then( m => m.DoencaCadastrarPageModule)
   }
 ];
 @NgModule({

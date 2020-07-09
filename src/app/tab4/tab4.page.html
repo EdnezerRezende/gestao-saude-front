@@ -9,16 +9,9 @@
     (ionInput)="getItems($event)"
   ></ion-searchbar>
 
-  <ion-list *ngFor="let paciente of pacientesSearch">
-    <ion-item-sliding #slidingCase>
-      <ion-item detail (click)="detalhar(paciente,slidingCase)">
-        <h2>
-          <strong><label>{{ paciente.nome }}</label></strong>
-        </h2>
-        <br/><br/>
-        <h4><label>{{ paciente.numeroSES }}</label></h4>
-      </ion-item>
-    </ion-item-sliding>
-  </ion-list>
-
+  <app-pacientes-listagem [listaSearch]="pacientesSearch" 
+  (detalharRetorno)="detalhar($event)"
+  >
+  </app-pacientes-listagem>
+  
 </ion-content>

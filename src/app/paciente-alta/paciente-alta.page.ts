@@ -17,6 +17,7 @@ export class PacienteAltaPage implements OnInit {
   title = 'Alta de Paciente';
   texto: string;
   formulario: FormGroup;
+  jaTinhaLeito = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,6 +33,11 @@ export class PacienteAltaPage implements OnInit {
 
     this.pacienteService.buscarPacientePorId(Number(pacienteId)).subscribe(resposta => {
       this.paciente = resposta;
+      if (this.paciente.leitos.length){
+        this.jaTinhaLeito = true;
+      }else{
+        this.jaTinhaLeito = false;
+      }
     }, erro => {
       console.log('Deu ruim');
     });

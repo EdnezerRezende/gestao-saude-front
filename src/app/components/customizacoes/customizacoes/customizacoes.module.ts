@@ -5,21 +5,29 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PacientesListagemComponent } from './pacientes-listagem/pacientes-listagem.component';
+import { LeitosCirculoComponent } from './leitos-circulo/leitos-circulo.component';
+import { ButtonModule } from 'primeng/button';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
     GestaoTitleHeaderComponent,
     AppSearchbarComponent,
-    PacientesListagemComponent],
+    PacientesListagemComponent,
+    LeitosCirculoComponent
+  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
+    ButtonModule,
+    FontAwesomeModule
   ],
   exports: [
     GestaoTitleHeaderComponent,
     AppSearchbarComponent,
-    PacientesListagemComponent
+    PacientesListagemComponent,
+    LeitosCirculoComponent
   ]
 })
 export class CustomizacoesModule { }

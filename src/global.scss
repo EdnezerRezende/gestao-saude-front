@@ -74,3 +74,10 @@
 .ion-text-left{
     text-align: left;
 }
+
+
+p-dropdown {
+    .ui-dropdown {
+      min-width:0; // auto , initial 😀
+    }
+}
