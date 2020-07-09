@@ -62,4 +62,10 @@
     
     <ion-router-outlet id="content1" main></ion-router-outlet>
   <!-- </ion-split-pane> -->
+  <ion-fab vertical="top" class="btn-pwa" horizontal="end" slot="fixed" edge >
+    <ion-fab-button (click)="instalarPWA($event)"
+    *ngIf="showBtn">
+      <ion-icon name="add-circle-outline" style="font-weight: bold;"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-app>
