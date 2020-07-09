@@ -41,7 +41,7 @@ export class Tab4Page implements OnInit {
     );
   }
 
-  detalhar(paciente, slidingCase) {
+  detalhar(paciente) {
     this.navCtrl.navigateForward(['/paciente-alta', 'pacienteId', paciente.id]);
   }
 
