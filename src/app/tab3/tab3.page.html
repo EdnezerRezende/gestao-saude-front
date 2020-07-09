@@ -3,4 +3,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-searchbar
+    animated="true"
+    placeholder="Pesquisar "
+    (ionInput)="getItems($event)"
+  ></ion-searchbar>
+
+  <app-pacientes-listagem [listaSearch]="pacientesSearch" 
+    (detalharRetorno)="detalhar($event)"
+  >
+  </app-pacientes-listagem>
+  
+
 </ion-content>

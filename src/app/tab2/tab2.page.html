@@ -2,6 +2,69 @@
   <app-gestao-title-header [title]="title"></app-gestao-title-header>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="false" padding>
+  <form [formGroup]="formulario" >
+    <ion-list>
+      <ion-item>
+        <ion-label position="stacked">Nome: <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="text" inputmode="text" name="nome" formControlName="nome" ></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label position="stacked">Número SES: <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="number" inputmode="number" name="numeroSES" formControlName="numeroSES" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Sexo: <ion-text color="danger">*</ion-text></ion-label>
+        <ion-select
+          formControlName="sexo"
+          [compareWith]="compareFn" >
+          <ion-select-option *ngFor="let sexo of sexos" [value]="sexo">{{sexo}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Data de Nascimento: <ion-text color="danger">*</ion-text></ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dataNascimento" placeholder="Selecione a Data"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Origem: <ion-text color="danger">*</ion-text></ion-label>
+        <ion-select
+          formControlName="origem"
+          [compareWith]="compareFnOrigem" >
+          <ion-select-option *ngFor="let localOrigem of localOrigemDTO" [value]="localOrigem">{{localOrigem.nomeOrigem}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Data Admissão Origem: <ion-text color="danger">*</ion-text></ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dataAdmissaoHCMG" placeholder="Selecione a Data"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Comorbidades: </ion-label>
+        <ion-select
+          formControlName="comorbidades"
+          [compareWith]="compareFnComorbidades" 
+          multiple="true" 
+          cancelText="Cancelar" 
+          >
+          <ion-select-option *ngFor="let doenca of doencas" [value]="doenca">{{doenca.nomeDoenca}}</ion-select-option>
+        </ion-select>
+        
+      </ion-item>
+
+
+    </ion-list>
+  </form>
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+    <ion-fab-button (click)="salvar()" [disabled]="formulario.invalid">
+      <ion-icon name="send"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-button expand="full" color="secondary" (click)="limparFormulario()">
+    LIMPAR
+  </ion-button>
 </ion-content>

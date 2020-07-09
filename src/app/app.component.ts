@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, MenuController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -10,11 +10,18 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
+  showLevel1 = null;
+  paginas: any;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    public nav: NavController,
+    public menuCtrl: MenuController
   ) {
+    this.tratarMenuTela();
     this.initializeApp();
   }
 
@@ -24,4 +31,110 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  tratarMenuTela() {
+    this.paginas = [
+      {
+        titulo: 'Leito',
+        subTitulo: [
+          {
+            submenu: 'Cadastrar',
+            componente: '/leito-cadastrar',
+            iconeSub: 'pencil-outline',
+          },
+          {
+            submenu: 'Listar',
+            componente: '/leito-listar',
+            iconeSub: 'list-circle-outline',
+          },
+        ],
+        icone: 'bed-outline',
+      },
+      {
+        titulo: 'Origem',
+        subTitulo: [
+          {
+            submenu: 'Cadastrar',
+            componente: '/origem-cadastrar',
+            iconeSub: 'pencil-outline',
+          },
+          {
+            submenu: 'Listar',
+            componente: '/origem-listar',
+            iconeSub: 'list-circle-outline',
+          },
+        ],
+        icone: 'wap-horizontal-outline',
+      },
+      {
+        titulo: 'Paciente',
+        subTitulo: [
+          {
+            submenu: 'Pacientes Com Leito ',
+            componente: '/pacientes-com-leito',
+            iconeSub: 'list-circle-outline',
+          },
+          {
+            submenu: 'Pacientes liberados ',
+            componente: '/pacientes-liberados',
+            iconeSub: 'list-circle-outline',
+          },
+        ],
+        icone: 'wap-horizontal-outline',
+      },
+      {
+        titulo: 'Relatórios',
+        subTitulo: [
+          {
+            submenu: 'Leito Quantitativos',
+            componente: '/leitos-quantidades',
+            iconeSub: 'list-circle-outline',
+          },
+          {
+            submenu: 'Leitos x Ocupação',
+            componente: '/leitos-ocupacao',
+            iconeSub: 'list-circle-outline',
+          },
+        ],
+        icone: 'wap-horizontal-outline',
+      },
+      {
+        titulo: 'Doença',
+        subTitulo: [
+          {
+            submenu: 'Cadastrar',
+            componente: '/doenca-cadastrar',
+            iconeSub: 'pencil-outline',
+          },
+          {
+            submenu: 'Listar',
+            componente: '/doenca-listar',
+            iconeSub: 'list-circle-outline',
+          },
+        ],
+        icone: 'thermometer-outline',
+      },
+    ];
+  }
+
+  toggleLevel1(idx) {
+    if (this.isLevel1Shown(idx)) {
+      this.showLevel1 = null;
+    } else {
+      this.showLevel1 = idx;
+    }
+  }
+
+  isLevel1Shown(idx) {
+    return this.showLevel1 === idx;
+  }
+
+  irPagina(componente) {
+    this.menuCtrl.close();
+    this.showLevel1 = null;
+    this.toggleLevel1(null);
+    this.nav.navigateRoot('');
+    this.nav.navigateForward(componente);
+  }
+
 }

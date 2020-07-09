@@ -3,6 +3,15 @@
 </ion-header>
 
 <ion-content>
-  
+  <ion-searchbar
+    animated="true"
+    placeholder="Pesquisar "
+    (ionInput)="getItems($event)"
+  ></ion-searchbar>
 
+  <app-pacientes-listagem [listaSearch]="pacientesSearch" 
+  (detalharRetorno)="detalhar($event)"
+  >
+  </app-pacientes-listagem>
+  
 </ion-content>

@@ -1,0 +1,14 @@
+<ion-list *ngFor="let item of listaSearch" >
+  <ion-item-sliding #slidingCase >
+    <ion-item detail=false (click)="detalhar(item,slidingCase)" >
+      <h2>
+        <strong><label>{{ item.nome | uppercase}}</label></strong>
+        <strong class="ajustaNumero"><label>{{ item.numeroSES }}</label></strong>
+      </h2>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option (click)="deletar(item, slidingCase)" color="danger">Deletar</ion-item-option>
+      <ion-item-option (click)="alterar(item, slidingCase)" color="primary">Alterar</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>

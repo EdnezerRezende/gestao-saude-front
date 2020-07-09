@@ -1,0 +1,14 @@
+<ion-header>
+  <app-gestao-title-header [rota]="'/tabs/tab1'" [title]="title"></app-gestao-title-header>
+</ion-header>
+
+<ion-content>
+  <app-app-searchbar (retornoPesquisa)="getItems($event)"></app-app-searchbar>
+  <br /><br />  
+  <app-pacientes-listagem [listaSearch]="pacientesSearch" 
+    (detalharRetorno)="detalhar($event)"
+    (alterarRetorno)="alterar($event)"
+    (deletarRetorno)="deletar($event)"
+  >
+  </app-pacientes-listagem>
+</ion-content>

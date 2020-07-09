@@ -1,0 +1,21 @@
+<!-- <ion-item-divider class="text-center"><div style="width: 100%; text-align: center;"><strong>Leitos </strong></div></ion-item-divider>
+    <br/>
+<div>
+  <span *ngFor="let leito of leitos; let i= index">
+    <ion-chip outline color="dark" [ngClass]="{'leitoUso': leito.emUso}">
+      <ion-icon  name="bed-outline"></ion-icon>
+      <ion-label>{{retornaNumero(leito.numeroLeito)}}</ion-label>
+    </ion-chip>
+  </span >
+</div> -->
+
+<ion-item-divider class="text-center"><div style="width: 100%; text-align: center;"><strong>Leitos </strong></div></ion-item-divider>
+    <br/>
+<div>
+  <span *ngFor="let leito of leitos; let i= index">
+    <button pButton label="{{retornaNumero(leito.numeroLeito)}}" type="button" iconPos="left" icon="fa fa-bed" class="ui-button-secondary ui-button-rounded" [ngClass]="{'leitoUso': leito.emUso}">
+      <!-- <i class="fa fa-bed"></i> -->
+      <!-- <span>{{retornaNumero(leito.numeroLeito)}}</span> -->
+    </button >
+  </span >
+</div>

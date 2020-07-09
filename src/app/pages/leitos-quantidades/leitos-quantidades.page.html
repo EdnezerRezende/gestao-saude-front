@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <app-gestao-title-header [rota]="'/tabs/tab1'" [title]="title"></app-gestao-title-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <table id="conteudo" #conteudo>
+    <p-fieldset legend="Masculino 'A'"  [toggleable]="true">
+      <span><strong>Quantidade Leitos :</strong>{{quantidadeMasculinoA + quantidadeMasculinoALiberados}}</span>
+      <br /> 
+      <span><strong>Quantidade Leitos Vagos : </strong>{{quantidadeMasculinoALiberados}}</span>
+      <br /> 
+      <span><strong>Quantidade Leitos Ocupados: </strong>{{quantidadeMasculinoA}}</span>
+      <br /> 
+      <br/>
+      <app-leitos-circulo [leitos]="leitosMasculinoA"></app-leitos-circulo>
+    </p-fieldset>
+    <p-fieldset legend="Masculino 'B'"  [toggleable]="true">
+      <span><strong>Quantidade Leitos :</strong>{{quantidadeMasculinoB + quantidadeMasculinoBLiberados}}</span>
+      <br /> 
+      <span><strong>Quantidade Leitos Vagos : </strong>{{quantidadeMasculinoBLiberados}}</span>
+      <br /> 
+      <span><strong>Quantidade Leitos Ocupados: </strong>{{quantidadeMasculinoB}}</span>
+      <br /> 
+      <br/>
+      <app-leitos-circulo [leitos]="leitosMasculinoB"></app-leitos-circulo>
+      
+    </p-fieldset>
+    <p-fieldset legend="Feminino 'A'"  [toggleable]="true">
+      <span><strong>Quantidade Leitos :</strong>{{quantidadeFemininoA + quantidadeFemininoALiberados}}</span>
+      <br /> 
+      <span><strong>Quantidade Leitos Vagos : </strong>{{quantidadeFemininoALiberados}}</span>
+      <br /> 
+      <span><strong>Quantidade Leitos Ocupados: </strong>{{quantidadeFemininoA}}</span>
+      <br /> 
+      <br/>
+      <app-leitos-circulo [leitos]="leitosFemininoA"></app-leitos-circulo>
+    </p-fieldset>
+    <p-fieldset legend="Feminino 'B'"  [toggleable]="true">
+      <span><strong>Quantidade Leitos :</strong>{{quantidadeFemininoB + quantidadeFemininoBLiberados}}</span>
+      <br /> 
+      <span><strong>Quantidade Leitos Vagos : </strong>{{quantidadeFemininoBLiberados}}</span>
+      <br /> 
+      <span><strong>Quantidade Leitos Ocupados: </strong>{{quantidadeFemininoB}}</span>
+      <br /> 
+      <br/>
+      <app-leitos-circulo [leitos]="leitosFemininoB"></app-leitos-circulo>
+      
+    </p-fieldset>
+  </table>
+  <ion-button fill="clear" expand="full" type="button" (click)="exportPDF(conteudo)" color="primary" size="large"><i class="pi pi-file-pdf"></i>
+    <ion-ripple-effect></ion-ripple-effect>
+  </ion-button>
+  
+</ion-content>

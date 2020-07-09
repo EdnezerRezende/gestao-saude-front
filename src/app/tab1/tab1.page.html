@@ -3,11 +3,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">DashBoard</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  Vai apresentar vários gráficos 
-
+  <div class="text-center">
+    <ion-label ><strong>Pacientes Internados</strong></ion-label>
+    <p-chart type="pie" [data]="data" width="200w" height="200w"></p-chart>
+  </div>
+  <ion-item-divider></ion-item-divider>
+  <div class="text-center">
+    <ion-label ><strong>Leitos Disponíveis</strong></ion-label>
+    <p-chart type="doughnut" [data]="leitosDisponiveis" width="300w" height="300w"></p-chart>
+  </div>
 </ion-content>

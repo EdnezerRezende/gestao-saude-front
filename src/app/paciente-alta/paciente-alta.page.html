@@ -1,0 +1,33 @@
+<ion-header>
+  <app-gestao-title-header [rota]="'/tabs/tab4'" [title]="title"></app-gestao-title-header>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="paciente !== null && paciente.nome != null">
+    <ion-card-header>
+      <ion-card-title class="text-center" text-wrap>
+        <strong>{{ paciente.nome }}</strong>
+      </ion-card-title> 
+    </ion-card-header>
+    <ion-list>
+      <div class="padding-left">
+        <h6 > <strong>Número SES: </strong>{{ paciente.numeroSES}}</h6>
+        <h6 > <strong>Sexo: </strong>{{ paciente.sexo }}</h6>
+        <h6 > <strong>Data de Nascimento: </strong>{{ paciente.dataNascimento | date: 'dd/MM/yyyy' }}</h6>
+        <h6 *ngIf="paciente.leitos.length && jaTinhaLeito"> <strong>Leito: </strong>{{ paciente.leitos[0].numeroLeito + ' - ' + paciente.leitos[0].ala + ' - ' + paciente.leitos[0].setor }}</h6>
+      <!-- <ion-item-divider *ngIf="servico.telefones" color="light" style="text-align:center;">Lista de Telefones</ion-item-divider> -->
+      <!-- <h6 *ngIf="servico.telefones" ><p *ngFor="let telefone of servico.telefones"> <ion-icon name="md-call" style="color: #55acee"></ion-icon>  {{ telefone }}</p></h6> -->
+      </div>
+    </ion-list>
+  </ion-card>
+
+  <form [formGroup]="formulario" >
+    <p-editor formControlName="texto" [style]="{'height':'320px'}"></p-editor>
+  </form>
+  
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge>
+    <ion-fab-button (click)="concederAlta()" >
+      <ion-icon name="send"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
