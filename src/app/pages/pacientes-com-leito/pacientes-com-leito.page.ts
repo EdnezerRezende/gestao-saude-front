@@ -89,7 +89,7 @@ export class PacientesComLeitoPage implements OnInit {
   }
 
   detalhar(paciente) {
-    this.navCtrl.navigateForward(['/paciente-dados', 'pacienteId', paciente.id]);
+    this.navCtrl.navigateForward(['/paciente-dados', 'pacienteId', paciente.id, 'ehConsulta', true]);
   }
 
   alterar(paciente){

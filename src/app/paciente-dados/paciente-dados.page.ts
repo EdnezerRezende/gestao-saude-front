@@ -23,6 +23,7 @@ export class PacienteDadosPage implements OnInit {
   leitoPaciente = new LeitoPacienteDto();
   ehAlta = false;
   jaTinhaLeito = false;
+  ehConsulta = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,11 +36,10 @@ export class PacienteDadosPage implements OnInit {
   ngOnInit() {
     const pacienteId = this.route.snapshot.paramMap.get('id');
     this.ehAlta = (this.route.snapshot.paramMap.get('valor') === 'true');
-    if (this.ehAlta){
-      this.title = 'Detalhe da Liberação';
-    }else{
-      this.title = 'Associação de Leito';
-    }
+    this.ehConsulta = (this.route.snapshot.paramMap.get('ehConsulta') === 'true');
+
+    this.definirTitlePage();
+
     this.pacienteService.buscarPacientePorId(Number(pacienteId)).subscribe(resposta => {
       this.paciente = resposta;
       if (this.paciente.leitos.length){
@@ -56,6 +56,18 @@ export class PacienteDadosPage implements OnInit {
       console.log('Deu ruim');
     });
 
+  }
+
+  private definirTitlePage() {
+    if (this.ehAlta) {
+      this.title = 'Detalhe da Liberação';
+    }
+    else if (this.ehConsulta) {
+      this.title = 'Consulta';
+    }
+    else {
+      this.title = 'Associação de Leito';
+    }
   }
 
   compareFn(e1: string, e2: string): boolean {

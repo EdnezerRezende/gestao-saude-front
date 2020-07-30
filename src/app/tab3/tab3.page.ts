@@ -43,7 +43,7 @@ export class Tab3Page implements OnInit{
   }
 
   detalhar(paciente) {
-    this.navCtrl.navigateForward(['/paciente-dados', 'pacienteId', paciente.id]);
+    this.navCtrl.navigateForward(['/paciente-dados', 'pacienteId', paciente.id, paciente.id, 'ehConsulta', false]);
   }
 
 
